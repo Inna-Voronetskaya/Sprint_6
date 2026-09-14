@@ -1,14 +1,10 @@
 '''Page object страницы создания заказа.'''
 import allure
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 from locators import order_page_locators as loc
 from pages.base_page import BasePage
-
 
 class OrderPage(BasePage):
     
@@ -55,11 +51,13 @@ class OrderPage(BasePage):
     @allure.step('Заполнение поля «Срок аренды» формы данных аренды.')
     def set_days(self, days):
         self.click_element(loc.DAYS)
-        self.click_element((By.XPATH, f"//div[text()='{days}']"))
+        locator = (By.XPATH, f"//div[text()='{days}']")
+        self.click_element(locator)
 
     @allure.step('Заполнение поля «Цвет самоката» формы данных аренды.')
     def set_color(self, color):
-        self.click_element((By.ID, color))
+        locator = (By.ID, color)
+        self.click_element(locator)
 
     @allure.step('Заполнение поля «Комментарий для курьера» данных аренды.')
     def set_comment(self, comment):
@@ -82,25 +80,12 @@ class OrderPage(BasePage):
 
     @allure.step('Нажатие кнопки «Да» окна подтверждения заказа.')
     def yes_btn_click(self):
-        time.sleep(2)
-        for locator in [loc.YES_BTN, (By.XPATH, "//button[contains(text(), 'Да')]")]:
-            try:
-                self.click_element(locator, timeout=3)
-                return
-            except:
-                continue
+        self.wait_for_element_clickable(loc.YES_BTN, timeout=15)
+        self.click_element(loc.YES_BTN, timeout=15)
 
     @allure.step('Получение заголовка окна заказ оформлен.')
     def get_order_confirmed_title(self):
-        time.sleep(2)
-        if "order" in self.driver.current_url:
-            return "Заказ оформлен"
-        try:
-            return WebDriverWait(self.driver, 5).until(
-                EC.visibility_of_element_located((By.XPATH, "//div[contains(text(), 'Заказ оформлен')]"))
-            ).text
-        except:
-            return "Заказ оформлен"
+        return self.get_text(loc.ORDER_CONFIRMED_TITLE)
 
     def create_order(self, customer, rent):
         self.fill_customer_form(**customer)

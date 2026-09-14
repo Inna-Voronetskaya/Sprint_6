@@ -20,7 +20,7 @@ class TestHeaderPage:
         header_page.yandex_logo_click()
         header_page.wait_for_number_of_windows(2)
         header_page.switch_to_new_window()
-        header_page.wait.until(lambda driver: driver.current_url != 'about:blank')
+        header_page.wait_for_url_not_about_blank()
         assert 'dzen.ru' in header_page.get_current_url() or 'ya.ru' in header_page.get_current_url()
 
     @allure.title('Редирект на главную по клику на лого Самокат')

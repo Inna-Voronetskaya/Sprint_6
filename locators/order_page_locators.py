@@ -17,11 +17,10 @@ NEXT_BTN = (By.XPATH, BUTTON.format('Далее'))
 DELIVERY_DATE = (By.XPATH, INPUT_FIELD.format('* Когда привезти самокат'))
 DAYS = (By.XPATH, "//div[text()='* Срок аренды']")
 COMMENT_FIELD = (By.XPATH, INPUT_FIELD.format('Комментарий для курьера'))
-CONFIRM_ORDER_BTN = (By.XPATH, BUTTON.format('Заказать'))
-
+CONFIRM_ORDER_BTN = (By.XPATH, "//button[text()='Заказать' and contains(@class, 'Button_Middle')]")
 # === Окно подтверждения ===
-CONFIRMATION_TITLE = (By.XPATH, "//div[text()='Хотите оформить заказ?']")
-YES_BTN = (By.XPATH, "//button[contains(text(), 'Да')]")
+CONFIRMATION_TITLE = (By.XPATH, "//div[contains(text(), 'Хотите оформить')]")
+YES_BTN = (By.XPATH, "//button[text()='Да' and contains(@class, 'Button_Middle')]")
 
 # === Окно "ЗАКАЗ ОФОРМЛЕН" ===
-ORDER_CONFIRMED_TITLE = (By.XPATH, "//div[contains(text(), 'Заказ оформлен')]")
+ORDER_CONFIRMED_TITLE = (By.XPATH, "//div[contains(@class, 'Order_ModalHeader')]")
