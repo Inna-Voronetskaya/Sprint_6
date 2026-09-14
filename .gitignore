@@ -1,0 +1,35 @@
+# Виртуальное окружение
+venv/
+env/
+.venv/
+ENV/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# PyTest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Allure
+allure_results/
+allure-report/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+.DS_Store
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
